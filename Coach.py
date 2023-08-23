@@ -63,8 +63,11 @@ class Coach():
             action = np.random.choice(len(pi), p=pi)
             board, self.curPlayer = self.game.getNextState(board, self.curPlayer, action)
 
+            # OtelloGame.py内のgetGameEnded()を参照
+            # return 0 if not ended, 1 if player 1 won, -1 if player 1 lost
             r = self.game.getGameEnded(board, self.curPlayer)
 
+            # ゲームが終了した時に実施される処理 (while文はreturnで終了できる)
             if r != 0:
                 return [(x[0], x[2], r * ((-1) ** (x[1] != self.curPlayer))) for x in trainExamples]
 
